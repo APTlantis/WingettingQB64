@@ -9,4 +9,3 @@ Just having fun with QB64.
   <img alt="Status" src="https://img.shields.io/badge/status-active-success">
 </p>
 
-More to come this was just day 1.
