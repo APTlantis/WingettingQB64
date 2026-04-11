@@ -5,13 +5,6 @@
 '-----------------------------------------------------------
 
 ': Controls' IDs: ------------------------------------------------------------------
-DIM SHARED ImportAListBT AS LONG
-DIM SHARED MenuBar1 AS LONG
-DIM SHARED FileMenu AS LONG
-DIM SHARED ExitMI AS LONG
-DIM SHARED EditMenu AS LONG
-DIM SHARED HelpMenu AS LONG
-DIM SHARED LogoPic AS LONG
 DIM SHARED WinGetting AS LONG
 DIM SHARED SearchBT AS LONG
 DIM SHARED SearchTB AS LONG
@@ -38,7 +31,7 @@ DIM SHARED QueueId(1 TO 2000) AS STRING
 
 ': External modules: ---------------------------------------------------------------
 '$INCLUDE:'InForm\InForm.bi'
-'$INCLUDE:'InForm\clojure.uitheme'
+'$INCLUDE:'InForm\xp.uitheme'
 '$INCLUDE:'QB64.frm'
 
 ': Event procedures: ---------------------------------------------------------------
@@ -47,12 +40,6 @@ SUB __UI_BeforeInit
 END SUB
 
 SUB __UI_OnLoad
-
-    DIM tempImg AS LONG
-    tempImg = _LOADIMAGE("assetspt-qbasic-logo.png", 32)
-    IF tempImg < -1 THEN
-        Control(LogoPic).Image = tempImg
-    END IF
     _PRINTMODE _KEEPBACKGROUND
     SetCaption PackageLB, "Package"
     SetCaption AddToListBT, "Add to Queue"
@@ -83,15 +70,7 @@ END SUB
 SUB __UI_Click (id AS LONG)
     LogDebug "Click id=" + LTRIM$(STR$(id))
     SELECT CASE id
-                CASE ExitMI
-            SYSTEM
-
-        CASE ImportAListBT
-
-        LogDebug "Import button clicked."
-            ImportQueueList
-
-CASE WinGetting
+        CASE WinGetting
 
         CASE SearchBT
             LogDebug "Search button clicked. query=" + Text(SearchTB)
@@ -129,8 +108,6 @@ END SUB
 
 SUB __UI_MouseEnter (id AS LONG)
     SELECT CASE id
-        CASE ImportAListBT
-
         CASE WinGetting
 
         CASE SearchBT
@@ -148,18 +125,20 @@ SUB __UI_MouseEnter (id AS LONG)
         CASE ListBox2
 
         CASE DownloadPackagesBT
-            
-CASE SaveThisListBT
-            
-CASE PackageLB
+            LogDebug "Install Queue button clicked."
+            InstallQueue
+
+        CASE SaveThisListBT
+            LogDebug "Save Queue button clicked."
+            SaveQueue
+
+        CASE PackageLB
 
     END SELECT
 END SUB
 
 SUB __UI_MouseLeave (id AS LONG)
     SELECT CASE id
-        CASE ImportAListBT
-
         CASE WinGetting
 
         CASE SearchBT
@@ -177,18 +156,20 @@ SUB __UI_MouseLeave (id AS LONG)
         CASE ListBox2
 
         CASE DownloadPackagesBT
-            
-CASE SaveThisListBT
-            
-CASE PackageLB
+            LogDebug "Install Queue button clicked."
+            InstallQueue
+
+        CASE SaveThisListBT
+            LogDebug "Save Queue button clicked."
+            SaveQueue
+
+        CASE PackageLB
 
     END SELECT
 END SUB
 
 SUB __UI_FocusIn (id AS LONG)
     SELECT CASE id
-        CASE ImportAListBT
-
         CASE SearchBT
 
         CASE SearchTB
@@ -204,18 +185,20 @@ SUB __UI_FocusIn (id AS LONG)
         CASE ListBox2
 
         CASE DownloadPackagesBT
-            
-CASE SaveThisListBT
-            
-END SELECT
+            LogDebug "Install Queue button clicked."
+            InstallQueue
+
+        CASE SaveThisListBT
+            LogDebug "Save Queue button clicked."
+            SaveQueue
+
+    END SELECT
 END SUB
 
 SUB __UI_FocusOut (id AS LONG)
     'This event occurs right before a control loses focus.
     'To prevent a control from losing focus, set __UI_KeepFocus = True below.
     SELECT CASE id
-        CASE ImportAListBT
-
         CASE SearchBT
 
         CASE SearchTB
@@ -231,16 +214,18 @@ SUB __UI_FocusOut (id AS LONG)
         CASE ListBox2
 
         CASE DownloadPackagesBT
-            
-CASE SaveThisListBT
-            
-END SELECT
+            LogDebug "Install Queue button clicked."
+            InstallQueue
+
+        CASE SaveThisListBT
+            LogDebug "Save Queue button clicked."
+            SaveQueue
+
+    END SELECT
 END SUB
 
 SUB __UI_MouseDown (id AS LONG)
     SELECT CASE id
-        CASE ImportAListBT
-
         CASE WinGetting
 
         CASE SearchBT
@@ -258,18 +243,20 @@ SUB __UI_MouseDown (id AS LONG)
         CASE ListBox2
 
         CASE DownloadPackagesBT
-            
-CASE SaveThisListBT
-            
-CASE PackageLB
+            LogDebug "Install Queue button clicked."
+            InstallQueue
+
+        CASE SaveThisListBT
+            LogDebug "Save Queue button clicked."
+            SaveQueue
+
+        CASE PackageLB
 
     END SELECT
 END SUB
 
 SUB __UI_MouseUp (id AS LONG)
     SELECT CASE id
-        CASE ImportAListBT
-
         CASE WinGetting
 
         CASE SearchBT
@@ -287,10 +274,14 @@ SUB __UI_MouseUp (id AS LONG)
         CASE ListBox2
 
         CASE DownloadPackagesBT
-            
-CASE SaveThisListBT
-            
-CASE PackageLB
+            LogDebug "Install Queue button clicked."
+            InstallQueue
+
+        CASE SaveThisListBT
+            LogDebug "Save Queue button clicked."
+            SaveQueue
+
+        CASE PackageLB
 
     END SELECT
 END SUB
@@ -299,8 +290,6 @@ SUB __UI_KeyPress (id AS LONG)
     'When this event is fired, __UI_KeyHit will contain the code of the key hit.
     'You can change it and even cancel it by making it = 0
     SELECT CASE id
-        CASE ImportAListBT
-
         CASE SearchBT
 
         CASE SearchTB
@@ -320,10 +309,14 @@ SUB __UI_KeyPress (id AS LONG)
         CASE ListBox2
 
         CASE DownloadPackagesBT
-            
-CASE SaveThisListBT
-            
-END SELECT
+            LogDebug "Install Queue button clicked."
+            InstallQueue
+
+        CASE SaveThisListBT
+            LogDebug "Save Queue button clicked."
+            SaveQueue
+
+    END SELECT
 END SUB
 
 SUB __UI_TextChanged (id AS LONG)
@@ -419,41 +412,6 @@ SUB SaveQueue
 
     SetStatus "Saved " + LTRIM$(STR$(QueueCount)) + " packages to saved_packages.txt!"
     Notify "Saved packages to saved_packages.txt!"
-END SUB
-
-SUB ImportQueueList
-    DIM importFile AS STRING
-    DIM rawLine AS STRING
-    DIM pkgId AS STRING
-
-    importFile = ProjectFile$("saved_packages.txt")
-    IF _FILEEXISTS(importFile) = 0 THEN
-        SetStatus "No saved_packages.txt found to import."
-        EXIT SUB
-    END IF
-
-    OPEN importFile FOR INPUT AS #3
-    DO UNTIL EOF(3)
-        LINE INPUT #3, rawLine
-        rawLine = _TRIM$(rawLine)
-        
-        ' Ignore empty lines or comments if any
-        IF LEN(rawLine) > 0 THEN
-            ' Very flexible parsing: assume the main piece is the first chunk before spaces
-            ' Or if it's just ID, just take it. Let's assume the string holds valid IDs since winget handles spaces.
-            pkgId = rawLine
-            IF QueueCount < UBOUND(QueueName) THEN
-                QueueCount = QueueCount + 1
-                QueueName(QueueCount) = pkgId
-                QueueId(QueueCount) = pkgId
-                AddItem ListBox2, pkgId + " [Imported]"
-            END IF
-        END IF
-    LOOP
-    CLOSE #3
-
-    SetStatus "Imported list from saved_packages.txt!"
-    Notify "Imported packages to Queue."
 END SUB
 
 SUB DoSearch

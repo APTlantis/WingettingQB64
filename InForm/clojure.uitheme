@@ -1,0 +1,43 @@
+'---------------------------------------------------------------------------------
+'*** CLOJURE.UITHEME ***
+'Flat theme template
+'---------------------------------------------------------------------------------
+'VWATCH64:OFF
+SUB __UI_ThemeSetup
+    'Metrics
+    __UI_ScrollbarWidth = 17
+    __UI_ScrollbarButtonHeight = 17
+    __UI_MenuBarOffset = 8
+    __UI_MenuItemOffset = 22
+    __UI_DefaultCaptionIndent = 5
+END SUB
+
+'---------------------------------------------------------------------------------
+FUNCTION __UI_DefaultColor~& (ControlType AS _BYTE, Attribute AS _BYTE)
+    DIM Colors(1 TO 6) AS _UNSIGNED LONG
+
+    '.ForeColor
+    Colors(1) = _RGB32(196, 221, 189)
+    IF ControlType <> __UI_Type_Form AND Control(__UI_FormID).ForeColor <> Colors(1) THEN _
+        Colors(1) = Control(__UI_FormID).ForeColor
+    '.BackColor
+    Colors(2) = _RGB32(4, 8, 13)
+    IF ControlType <> __UI_Type_Form AND Control(__UI_FormID).BackColor <> Colors(2) THEN _
+        Colors(2) = Control(__UI_FormID).BackColor
+    '.SelectedForeColor
+    Colors(3) = _RGB32(196, 221, 189)
+    IF ControlType <> __UI_Type_Form AND Control(__UI_FormID).SelectedForeColor <> Colors(3) THEN _
+        Colors(3) = Control(__UI_FormID).SelectedForeColor
+    '.SelectedBackColor
+    Colors(4) = _RGB32(34, 66, 68)
+    IF ControlType <> __UI_Type_Form AND Control(__UI_FormID).SelectedBackColor <> Colors(4) THEN _
+        Colors(4) = Control(__UI_FormID).SelectedBackColor
+    '.BorderColor
+    Colors(5) = _RGB32(34, 66, 68)
+    IF ControlType <> __UI_Type_Form AND Control(__UI_FormID).BorderColor <> Colors(5) THEN _
+        Colors(5) = Control(__UI_FormID).BorderColor
+    'Tip color (global property)
+    Colors(6) = _RGB32(4, 8, 13)
+
+    __UI_DefaultColor~& = Colors(Attribute)
+END FUNCTION

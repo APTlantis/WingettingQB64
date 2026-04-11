@@ -7,71 +7,153 @@ SUB __UI_LoadForm
 
     DIM __UI_NewID AS LONG, __UI_RegisterResult AS LONG
 
-    __UI_NewID = __UI_NewControl(__UI_Type_Form, "WinGetting", 500, 454, 0, 0, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_Form, "WinGetting", 500, 526, 0, 0, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
+    Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
     SetCaption __UI_NewID, "WinGetting"
     Control(__UI_NewID).Font = SetFont("segoeui.ttf", 12)
     Control(__UI_NewID).HasBorder = False
 
-    __UI_NewID = __UI_NewControl(__UI_Type_Button, "SearchBT", 200, 23, 17, 100, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_Button, "SearchBT", 200, 23, 17, 130, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     SetCaption __UI_NewID, "Search"
     Control(__UI_NewID).HasBorder = False
     Control(__UI_NewID).CanHaveFocus = True
 
-    __UI_NewID = __UI_NewControl(__UI_Type_TextBox, "SearchTB", 199, 23, 17, 59, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_TextBox, "SearchTB", 199, 23, 17, 89, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(6, 26, 37)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).BackColor = _RGB32(6, 26, 37)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     Control(__UI_NewID).HasBorder = True
     Control(__UI_NewID).CanHaveFocus = True
     Control(__UI_NewID).BorderSize = 1
 
-    __UI_NewID = __UI_NewControl(__UI_Type_ListBox, "ListBox1", 200, 200, 17, 142, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_ListBox, "ListBox1", 200, 200, 17, 172, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(6, 26, 37)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).BackColor = _RGB32(6, 26, 37)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     Control(__UI_NewID).HasBorder = True
     Control(__UI_NewID).CanHaveFocus = True
     Control(__UI_NewID).BorderSize = 1
 
-    __UI_NewID = __UI_NewControl(__UI_Type_Button, "AddToListBT", 200, 23, 17, 356, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_Button, "AddToListBT", 200, 23, 17, 386, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     SetCaption __UI_NewID, "Add to List"
     Control(__UI_NewID).HasBorder = False
     Control(__UI_NewID).CanHaveFocus = True
 
-    __UI_NewID = __UI_NewControl(__UI_Type_Button, "DownloadThisPackageBT", 200, 23, 17, 402, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_Button, "DownloadThisPackageBT", 200, 23, 17, 432, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     SetCaption __UI_NewID, "Download This Package"
     Control(__UI_NewID).HasBorder = False
     Control(__UI_NewID).CanHaveFocus = True
 
-    __UI_NewID = __UI_NewControl(__UI_Type_CheckBox, "Package1CB", 150, 23, 28, 149, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_CheckBox, "Package1CB", 150, 23, 28, 179, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     SetCaption __UI_NewID, "Package1"
     Control(__UI_NewID).HasBorder = False
     Control(__UI_NewID).CanHaveFocus = True
 
-    __UI_NewID = __UI_NewControl(__UI_Type_ListBox, "ListBox2", 200, 330, 268, 12, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_ListBox, "ListBox2", 200, 330, 268, 42, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(6, 26, 37)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).BackColor = _RGB32(6, 26, 37)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     Control(__UI_NewID).HasBorder = True
     Control(__UI_NewID).CanHaveFocus = True
     Control(__UI_NewID).BorderSize = 1
 
-    __UI_NewID = __UI_NewControl(__UI_Type_Button, "DownloadPackagesBT", 200, 23, 268, 356, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_Button, "DownloadPackagesBT", 200, 23, 268, 386, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     SetCaption __UI_NewID, "Download Packages"
     Control(__UI_NewID).HasBorder = False
     Control(__UI_NewID).CanHaveFocus = True
 
-    __UI_NewID = __UI_NewControl(__UI_Type_Button, "SaveThisListBT", 200, 23, 268, 402, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_Button, "SaveThisListBT", 200, 23, 268, 432, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     SetCaption __UI_NewID, "Save This List"
     Control(__UI_NewID).HasBorder = False
     Control(__UI_NewID).CanHaveFocus = True
 
-    __UI_NewID = __UI_NewControl(__UI_Type_Label, "PackageLB", 150, 23, 17, 25, 0)
+    __UI_NewID = __UI_NewControl(__UI_Type_Label, "PackageLB", 150, 23, 17, 55, 0)
     __UI_RegisterResult = 0
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     SetCaption __UI_NewID, "Package"
     Control(__UI_NewID).HasBorder = False
     Control(__UI_NewID).VAlign = __UI_Middle
+
+    __UI_NewID = __UI_NewControl(__UI_Type_Button, "ImportAListBT", 200, 23, 150, 479, 0)
+    __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    Control(__UI_NewID).BackColor = _RGB32(34, 66, 68)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    SetCaption __UI_NewID, "Import A List"
+    Control(__UI_NewID).HasBorder = False
+    Control(__UI_NewID).CanHaveFocus = True
+
+__UI_NewID = __UI_NewControl(__UI_Type_MenuBar, "MenuBar1", 500, 20, 0, 0, 0)
+    __UI_RegisterResult = 0
+    Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+
+    __UI_NewID = __UI_NewControl(__UI_Type_Menu, "FileMenu", 50, 20, 0, 0, __UI_GetID("MenuBar1"))
+    __UI_RegisterResult = 0
+    SetCaption __UI_NewID, "File"
+    Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+
+    __UI_NewID = __UI_NewControl(__UI_Type_MenuItem, "ExitMI", 100, 20, 0, 0, __UI_GetID("FileMenu"))
+    __UI_RegisterResult = 0
+    SetCaption __UI_NewID, "Exit"
+    Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    
+    __UI_NewID = __UI_NewControl(__UI_Type_Menu, "EditMenu", 50, 20, 50, 0, __UI_GetID("MenuBar1"))
+    __UI_RegisterResult = 0
+    SetCaption __UI_NewID, "Edit"
+    Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+    
+    __UI_NewID = __UI_NewControl(__UI_Type_Menu, "HelpMenu", 50, 20, 100, 0, __UI_GetID("MenuBar1"))
+    __UI_RegisterResult = 0
+    SetCaption __UI_NewID, "Help"
+    Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
+    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
+
+    __UI_NewID = __UI_NewControl(__UI_Type_PictureBox, "LogoPic", 64, 64, 420, 30, 0)
+    __UI_RegisterResult = 0
+    Control(__UI_NewID).HasBorder = False
+    Control(__UI_NewID).Stretch = True
 
 END SUB
 
@@ -87,4 +169,12 @@ SUB __UI_AssignIDs
     DownloadPackagesBT = __UI_GetID("DownloadPackagesBT")
     SaveThisListBT = __UI_GetID("SaveThisListBT")
     PackageLB = __UI_GetID("PackageLB")
+    ImportAListBT = __UI_GetID("ImportAListBT")
+MenuBar1 = __UI_GetID("MenuBar1")
+    FileMenu = __UI_GetID("FileMenu")
+    ExitMI = __UI_GetID("ExitMI")
+    EditMenu = __UI_GetID("EditMenu")
+    HelpMenu = __UI_GetID("HelpMenu")
+    LogoPic = __UI_GetID("LogoPic")
 END SUB
+
