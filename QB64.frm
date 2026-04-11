@@ -121,12 +121,7 @@ SUB __UI_LoadForm
     Control(__UI_NewID).HasBorder = False
     Control(__UI_NewID).CanHaveFocus = True
 
-__UI_NewID = __UI_NewControl(__UI_Type_MenuBar, "MenuBar1", 500, 20, 0, 0, 0)
-    __UI_RegisterResult = 0
-    Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
-    Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
-
-    __UI_NewID = __UI_NewControl(__UI_Type_Menu, "FileMenu", 50, 20, 0, 0, __UI_GetID("MenuBar1"))
+    __UI_NewID = __UI_NewControl(__UI_Type_MenuBar, "FileMenu", 50, 20, 0, 0, 0)
     __UI_RegisterResult = 0
     SetCaption __UI_NewID, "File"
     Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
@@ -138,22 +133,17 @@ __UI_NewID = __UI_NewControl(__UI_Type_MenuBar, "MenuBar1", 500, 20, 0, 0, 0)
     Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
     Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     
-    __UI_NewID = __UI_NewControl(__UI_Type_Menu, "EditMenu", 50, 20, 50, 0, __UI_GetID("MenuBar1"))
+    __UI_NewID = __UI_NewControl(__UI_Type_MenuBar, "EditMenu", 50, 20, 0, 0, 0)
     __UI_RegisterResult = 0
     SetCaption __UI_NewID, "Edit"
     Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
     Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
     
-    __UI_NewID = __UI_NewControl(__UI_Type_Menu, "HelpMenu", 50, 20, 100, 0, __UI_GetID("MenuBar1"))
+    __UI_NewID = __UI_NewControl(__UI_Type_MenuBar, "HelpMenu", 50, 20, 0, 0, 0)
     __UI_RegisterResult = 0
     SetCaption __UI_NewID, "Help"
     Control(__UI_NewID).BackColor = _RGB32(4, 8, 13)
     Control(__UI_NewID).ForeColor = _RGB32(196, 221, 189)
-
-    __UI_NewID = __UI_NewControl(__UI_Type_PictureBox, "LogoPic", 64, 64, 420, 30, 0)
-    __UI_RegisterResult = 0
-    Control(__UI_NewID).HasBorder = False
-    Control(__UI_NewID).Stretch = True
 
 END SUB
 
@@ -170,11 +160,9 @@ SUB __UI_AssignIDs
     SaveThisListBT = __UI_GetID("SaveThisListBT")
     PackageLB = __UI_GetID("PackageLB")
     ImportAListBT = __UI_GetID("ImportAListBT")
-MenuBar1 = __UI_GetID("MenuBar1")
     FileMenu = __UI_GetID("FileMenu")
     ExitMI = __UI_GetID("ExitMI")
     EditMenu = __UI_GetID("EditMenu")
     HelpMenu = __UI_GetID("HelpMenu")
-    LogoPic = __UI_GetID("LogoPic")
 END SUB
 

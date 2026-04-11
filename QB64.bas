@@ -48,11 +48,6 @@ END SUB
 
 SUB __UI_OnLoad
 
-    DIM tempImg AS LONG
-    tempImg = _LOADIMAGE("assetspt-qbasic-logo.png", 32)
-    IF tempImg < -1 THEN
-        Control(LogoPic).Image = tempImg
-    END IF
     _PRINTMODE _KEEPBACKGROUND
     SetCaption PackageLB, "Package"
     SetCaption AddToListBT, "Add to Queue"

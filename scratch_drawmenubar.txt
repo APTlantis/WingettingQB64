@@ -1,0 +1,72 @@
+SUB __UI_DrawMenuBar (This AS __UI_ControlTYPE, ControlState AS _BYTE)
+    DIM PrevDest AS LONG, TempCaption$
+    DIM Temp&
+
+    IF This.Redraw OR This.FocusState <> (__UI_Focus = This.ID) OR This.Value <> This.PreviousValue OR This.ControlState <> ControlState OR Caption(This.ID) <> __UI_TempCaptions(This.ID) _
+       OR __UI_ForceRedraw OR This.PreviousFont <> This.Font THEN
+        'Last time this control was drawn it had a different state/caption, so it'll be redrawn
+        This.Redraw = False
+        This.ControlState = ControlState
+        This.PreviousFont = This.Font
+        This.PreviousValue = This.Value
+
+        IF Caption(This.ID) <> __UI_TempCaptions(This.ID) THEN
+            __UI_RefreshMenuBar
+        END IF
+
+        __UI_TempCaptions(This.ID) = Caption(This.ID)
+        This.FocusState = (__UI_Focus = This.ID)
+
+        IF This.Canvas <> 0 THEN
+            _FREEIMAGE This.Canvas
+        END IF
+
+        This.Canvas = _NEWIMAGE(This.Width, This.Height, 32)
+
+        PrevDest = _DEST
+        _DEST This.Canvas
+        _FONT (This.Font)
+
+        '---
+        CLS , This.BackColor
+
+        TempCaption$ = __UI_TrimAt0$(Caption(This.ID))
+
+        IF __UI_Focus = This.ID OR _
+           (__UI_ParentMenu(__UI_TotalActiveMenus) = This.ID AND (Control(__UI_Focus).Type = __UI_Type_MenuPanel OR Control(__UI_Focus).Type = __UI_Type_MenuItem)) OR _
+           (__UI_HoveringID = This.ID AND (Control(__UI_Focus).Type <> __UI_Type_MenuPanel AND Control(__UI_Focus).Type <> __UI_Type_MenuBar AND Control(__UI_Focus).Type <> __UI_Type_MenuItem)) THEN
+            LINE (0, 0)-STEP(This.Width - 1, This.Height - 1), This.SelectedBackColor, BF
+            COLOR This.SelectedForeColor
+        ELSE
+            COLOR This.ForeColor
+        END IF
+
+        IF This.Disabled THEN
+            COLOR Darken(Control(__UI_FormID).BackColor, 80)
+        END IF
+
+        __UI_PrintString __UI_MenuBarOffset, ((This.Height \ 2) - (falcon_uspacing& + (((_FONT = 8) * -1) * __UI_Font8Offset + ((_FONT = 16) * -1) * __UI_Font16Offset)) \ 2), TempCaption$
+        IF This.HotKey > 0 AND (__UI_AltIsDown OR Control(__UI_Focus).Type = __UI_Type_MenuBar OR __UI_DesignMode) THEN
+            'Has "hot-key"
+            Temp& = __UI_PrintWidth(CHR$(This.HotKey))
+            LINE (__UI_MenuBarOffset + This.HotKeyOffset, ((This.Height \ 2) + (falcon_uspacing& + (((_FONT = 8) * -1) * __UI_Font8Offset + ((_FONT = 16) * -1) * __UI_Font16Offset)) \ 2) - 1)-STEP(Temp& - 1, 0), _DEFAULTCOLOR
+        END IF
+
+        IF __UI_DesignMode THEN
+            IF This.Left + This.Width = __UI_NewMenuBarTextLeft THEN
+                'Last menu bar item. Next is "Add new"
+                _DEST Control(__UI_FormID).Canvas
+                COLOR Darken(Control(__UI_FormID).BackColor, 80)
+                _FONT (This.Font)
+                LINE (__UI_NewMenuBarTextLeft + __UI_MenuBarOffset, ((This.Height \ 2) - (falcon_uspacing& + (((_FONT = 8) * -1) * __UI_Font8Offset + ((_FONT = 16) * -1) * __UI_Font16Offset)) \ 2))-STEP(__UI_PrintWidth("Add new"),(falcon_uspacing& + (((_FONT = 8) * -1) * __UI_Font8Offset + ((_FONT = 16) * -1) * __UI_Font16Offset))), Control(__UI_FormID).BackColor, BF
+                __UI_PrintString __UI_NewMenuBarTextLeft + __UI_MenuBarOffset, ((This.Height \ 2) - (falcon_uspacing& + (((_FONT = 8) * -1) * __UI_Font8Offset + ((_FONT = 16) * -1) * __UI_Font16Offset)) \ 2), "Add new"
+            END IF
+        END IF
+        '---
+
+        __UI_MakeHardwareImageFromCanvas This
+        _DEST PrevDest
+    END IF
+
+    IF This.Canvas THEN _PUTIMAGE (This.Left, This.Top), This.Canvas
+END SUB

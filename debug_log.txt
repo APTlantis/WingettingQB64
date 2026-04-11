@@ -440,3 +440,88 @@ First: Caprine [Caprine.Caprine]
 20:59:55 | IDs ListBox1=30, AddToListBT=31, DownloadThisPackageBT=32
 20:59:55 | IDs Package1CB=33, ListBox2=34, DownloadPackagesBT=35
 20:59:55 | IDs SaveThisListBT=36, PackageLB=37
+21:20:43 | IDs WinGetting=26, SearchBT=28, SearchTB=29
+21:20:43 | IDs ListBox1=30, AddToListBT=31, DownloadThisPackageBT=32
+21:20:43 | IDs Package1CB=33, ListBox2=34, DownloadPackagesBT=35
+21:20:43 | IDs SaveThisListBT=36, PackageLB=37
+21:25:58 | IDs WinGetting=26, SearchBT=28, SearchTB=29
+21:25:58 | IDs ListBox1=30, AddToListBT=31, DownloadThisPackageBT=32
+21:25:58 | IDs Package1CB=33, ListBox2=34, DownloadPackagesBT=35
+21:25:58 | IDs SaveThisListBT=36, PackageLB=37
+21:26:04 | Click id=38
+21:26:04 | Import button clicked.
+21:26:04 | Status: Imported list from saved_packages.txt!
+21:26:04 | Status: Imported packages to Queue.
+21:26:04 | Notify: Imported packages to Queue.
+21:29:32 | IDs WinGetting=26, SearchBT=28, SearchTB=29
+21:29:32 | IDs ListBox1=30, AddToListBT=31, DownloadThisPackageBT=32
+21:29:32 | IDs Package1CB=33, ListBox2=34, DownloadPackagesBT=35
+21:29:32 | IDs SaveThisListBT=36, PackageLB=37
+21:34:25 | IDs WinGetting=26, SearchBT=28, SearchTB=29
+21:34:25 | IDs ListBox1=30, AddToListBT=31, DownloadThisPackageBT=32
+21:34:25 | IDs Package1CB=33, ListBox2=34, DownloadPackagesBT=35
+21:34:25 | IDs SaveThisListBT=36, PackageLB=37
+21:34:31 | Click id=29
+21:34:36 | Click id=38
+21:34:36 | Import button clicked.
+21:34:36 | Status: Imported list from saved_packages.txt!
+21:34:36 | Status: Imported packages to Queue.
+21:34:36 | Notify: Imported packages to Queue.
+21:34:39 | Click id=29
+21:34:42 | Click id=29
+21:34:44 | Click id=29
+21:34:45 | Click id=29
+21:34:57 | Click id=28
+21:34:57 | Search button clicked. query=docker
+21:34:57 | DoSearch start. query=docker
+21:35:00 | Parsed results count=65
+21:35:00 | Status: Selected: Docker Desktop [Docker.DockerDesktop]
+21:35:00 | Status: Found 65 match(es).
+21:35:00 | Status: Search complete. Found 65 package(s).
+First: Docker Desktop [Docker.DockerDesktop]
+21:35:00 | Notify: Search complete. Found 65 package(s).
+First: Docker Desktop [Docker.DockerDesktop]
+21:35:00 | Status: Selected: Docker Desktop [Docker.DockerDesktop]
+21:42:25 | IDs WinGetting=26, SearchBT=28, SearchTB=29
+21:42:25 | IDs ListBox1=30, AddToListBT=31, DownloadThisPackageBT=32
+21:42:25 | IDs Package1CB=33, ListBox2=34, DownloadPackagesBT=35
+21:42:25 | IDs SaveThisListBT=36, PackageLB=37
+21:42:30 | Click id=26
+21:42:31 | Click id=26
+21:42:35 | Click id=26
+21:42:36 | Click id=39
+21:42:43 | Click id=26
+21:42:44 | Click id=26
+21:42:45 | Click id=26
+21:42:45 | Click id=26
+21:42:46 | Click id=26
+21:42:47 | Click id=26
+21:42:48 | Click id=50
+21:43:26 | Click id=41
+21:53:05 | IDs WinGetting=26, SearchBT=28, SearchTB=29
+21:53:05 | IDs ListBox1=30, AddToListBT=31, DownloadThisPackageBT=32
+21:53:05 | IDs Package1CB=33, ListBox2=34, DownloadPackagesBT=35
+21:53:05 | IDs SaveThisListBT=36, PackageLB=37
+21:53:14 | Click id=39
+21:53:15 | Click id=41
+21:53:16 | Click id=42
+21:53:34 | Click id=26
+21:53:37 | Click id=38
+21:53:37 | Import button clicked.
+21:53:37 | Status: Imported list from saved_packages.txt!
+21:53:37 | Status: Imported packages to Queue.
+21:53:37 | Notify: Imported packages to Queue.
+21:53:38 | Click id=29
+21:53:40 | Click id=29
+21:53:48 | Click id=28
+21:53:48 | Search button clicked. query=bun
+21:53:48 | DoSearch start. query=bun
+21:53:50 | Parsed results count=38
+21:53:50 | Status: Selected: Bun [Oven-sh.Bun]
+21:53:50 | Status: Found 38 match(es).
+21:53:50 | Status: Search complete. Found 38 package(s).
+First: Bun [Oven-sh.Bun]
+21:53:50 | Notify: Search complete. Found 38 package(s).
+First: Bun [Oven-sh.Bun]
+21:53:51 | Status: Selected: Bun [Oven-sh.Bun]
+21:53:58 | Click id=39

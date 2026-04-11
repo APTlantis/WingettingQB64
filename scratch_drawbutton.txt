@@ -1,0 +1,103 @@
+SUB __UI_DrawButton (This AS __UI_ControlTYPE, ControlState AS _BYTE)
+    'ControlState: 1 = Normal; 2 = Hover/focus; 3 = Mouse down; 4 = Disabled
+    DIM TempCaption$
+    DIM PrevDest AS LONG, TempControlState AS _BYTE
+
+    STATIC ControlImage AS LONG
+    CONST ButtonHeight = 21
+    CONST ButtonWidth = 18
+
+    IF ControlImage = 0 THEN ControlImage = __UI_LoadThemeImage("button.png")
+
+    TempControlState = ControlState
+    IF TempControlState = 1 THEN
+        IF (This.ID = __UI_DefaultButtonID AND This.ID <> __UI_Focus AND Control(__UI_Focus).Type <> __UI_Type_Button) OR This.ID = __UI_Focus THEN
+            TempControlState = 5
+        END IF
+    END IF
+
+    IF This.Redraw OR This.ControlState <> TempControlState OR This.FocusState <> (__UI_Focus = This.ID) OR Caption(This.ID) <> __UI_TempCaptions(This.ID) OR This.PreviousParentID <> This.ParentID OR __UI_ForceRedraw _
+       OR This.Font <> This.PreviousFont THEN
+        'Last time this control was drawn it had a different state/caption, so it'll be redrawn
+        This.Redraw = False
+        This.ControlState = TempControlState
+        This.PreviousFont = This.Font
+        This.FocusState = __UI_Focus = This.ID
+        __UI_TempCaptions(This.ID) = Caption(This.ID)
+        This.PreviousParentID = This.ParentID
+        IF This.ParentID THEN Control(This.ParentID).ChildrenRedrawn = True
+
+        IF This.Canvas <> 0 THEN
+            _FREEIMAGE This.Canvas
+        END IF
+
+        This.Canvas = _NEWIMAGE(This.Width, This.Height, 32)
+
+        PrevDest = _DEST
+        _DEST This.Canvas
+        _FONT (This.Font)
+        CLS , _RGBA32(0, 0, 0, 0)
+        TempCaption$ = __UI_TrimAt0$(Caption(This.ID))
+
+        'Back surface
+        _PUTIMAGE (0, 3)-(This.Width - 1, This.Height - 4), ControlImage, , (3, TempControlState * ButtonHeight - ButtonHeight + 3)-STEP(11, ButtonHeight - 7)
+
+        'Does this button have a helper canvas (icon)?
+        DIM IconWidth AS INTEGER, IconHeight AS INTEGER
+        IF This.HelperCanvas < -1 THEN
+            IF LEN(TempCaption$) THEN
+                'Icon will be to the left of caption
+                IconHeight = This.Height - 6
+                IconWidth = _WIDTH(This.HelperCanvas) * IconHeight / _HEIGHT(This.HelperCanvas)
+                _PUTIMAGE ((This.Width \ 2 - __UI_PrintWidth&(TempCaption$) \ 2) - ((IconWidth / 2) + 5), This.Height / 2 - ((This.Height - 4) / 2) + 1)-STEP(IconWidth - 1, IconHeight - 1), This.HelperCanvas
+            ELSE
+                'Icon will be centered
+                DIM PictureOffsetX AS INTEGER, PictureOffsetY AS INTEGER
+                IF This.ControlState = 3 THEN
+                    PictureOffsetX = 1
+                    PictureOffsetY = 1
+                END IF
+                IconHeight = This.Height - 6
+                IconWidth = _WIDTH(This.HelperCanvas) * (IconHeight / _HEIGHT(This.HelperCanvas))
+                _PUTIMAGE (This.Width \ 2 - ((IconWidth \ 2)) + PictureOffsetX, This.Height / 2 - ((This.Height - 4) / 2) + 1 + PictureOffsetY)-STEP(IconWidth - 1, IconHeight - 1), This.HelperCanvas
+            END IF
+        END IF
+
+        'Top and bottom edges
+        _PUTIMAGE (3, 0)-STEP(This.Width - 6, 3), ControlImage, , (3, TempControlState * ButtonHeight - ButtonHeight)-STEP(11, 3)
+        _PUTIMAGE (3, This.Height - 3)-STEP(This.Width - 6, 3), ControlImage, , (3, TempControlState * ButtonHeight - ButtonHeight + 18)-STEP(11, 3)
+
+        'Left edges and corners:
+        _PUTIMAGE (0, 2)-STEP(2, This.Height - 4), ControlImage, , (0, TempControlState * ButtonHeight - ButtonHeight + 2)-STEP(2, ButtonHeight - 6)
+        _PUTIMAGE (0, 0), ControlImage, , (0, TempControlState * ButtonHeight - ButtonHeight)-STEP(2, 2)
+        _PUTIMAGE (0, This.Height - 3), ControlImage, , (0, TempControlState * ButtonHeight - 3)-STEP(2, 2)
+
+        'Right edges and corners:
+        _PUTIMAGE (This.Width - 3, 2)-STEP(2, This.Height - 4), ControlImage, , (ButtonWidth - 3, TempControlState * ButtonHeight - ButtonHeight + 2)-STEP(2, ButtonHeight - 6)
+        _PUTIMAGE (This.Width - 2, 0), ControlImage, , (ButtonWidth - 2, TempControlState * ButtonHeight - ButtonHeight)-STEP(2, 2)
+        _PUTIMAGE (This.Width - 3, This.Height - 3), ControlImage, , (ButtonWidth - 3, TempControlState * ButtonHeight - 3)-STEP(2, 2)
+
+        'Caption:
+        IF NOT This.Disabled THEN
+            COLOR This.ForeColor
+        ELSE
+            COLOR Darken(Control(__UI_FormID).BackColor, 80)
+        END IF
+        __UI_PrintString (IconWidth / 2) + (This.Width \ 2 - __UI_PrintWidth&(TempCaption$) \ 2), ((This.Height \ 2) - uheight& \ 2), TempCaption$
+
+        'Hot key:
+        IF (This.HotKey > 0 AND (__UI_ShowHotKeys AND NOT This.Disabled)) OR (This.HotKey > 0 AND __UI_DesignMode) THEN
+            LINE ((This.Width \ 2 - __UI_PrintWidth&(TempCaption$) \ 2) + This.HotKeyOffset, ((This.Height \ 2) + uheight& \ 2))-STEP(__UI_PrintWidth&(CHR$(This.HotKey)) - 1, 0), This.ForeColor
+        END IF
+
+        'Focus outline:
+        IF __UI_Focus = This.ID AND __UI_KeyboardFocus THEN
+            LINE (2, 2)-STEP(This.Width - 5, This.Height - 5), _RGB32(0, 0, 0), B , 21845
+        END IF
+
+        __UI_MakeHardwareImageFromCanvas This
+        _DEST PrevDest
+    END IF
+
+    IF This.Canvas THEN _PUTIMAGE (This.Left, This.Top), This.Canvas
+END SUB

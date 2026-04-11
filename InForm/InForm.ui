@@ -6894,12 +6894,6 @@ SUB __UI_DrawButton (This AS __UI_ControlTYPE, ControlState AS _BYTE)
     DIM TempCaption$
     DIM PrevDest AS LONG, TempControlState AS _BYTE
 
-    STATIC ControlImage AS LONG
-    CONST ButtonHeight = 21
-    CONST ButtonWidth = 18
-
-    IF ControlImage = 0 THEN ControlImage = __UI_LoadThemeImage("button.png")
-
     TempControlState = ControlState
     IF TempControlState = 1 THEN
         IF (This.ID = __UI_DefaultButtonID AND This.ID <> __UI_Focus AND Control(__UI_Focus).Type <> __UI_Type_Button) OR This.ID = __UI_Focus THEN
@@ -6923,15 +6917,27 @@ SUB __UI_DrawButton (This AS __UI_ControlTYPE, ControlState AS _BYTE)
         END IF
 
         This.Canvas = _NEWIMAGE(This.Width, This.Height, 32)
-
         PrevDest = _DEST
         _DEST This.Canvas
         _FONT (This.Font)
         CLS , _RGBA32(0, 0, 0, 0)
         TempCaption$ = __UI_TrimAt0$(Caption(This.ID))
 
-        'Back surface
-        _PUTIMAGE (0, 3)-(This.Width - 1, This.Height - 4), ControlImage, , (3, TempControlState * ButtonHeight - ButtonHeight + 3)-STEP(11, ButtonHeight - 7)
+        ' --- FLAT RENDERING INJECTED ---
+        DIM DrawCol AS _UNSIGNED LONG
+        IF TempControlState = 1 THEN
+            DrawCol = This.BackColor
+        ELSEIF TempControlState = 2 THEN
+            DrawCol = This.SelectedBackColor
+        ELSEIF TempControlState = 3 THEN
+            DrawCol = This.BorderColor
+        ELSEIF TempControlState = 4 THEN
+            DrawCol = Darken(This.BackColor, 80)
+        ELSEIF TempControlState = 5 THEN
+            DrawCol = This.SelectedBackColor
+        END IF
+        
+        LINE (0, 0)-(This.Width - 1, This.Height - 1), DrawCol, BF
 
         'Does this button have a helper canvas (icon)?
         DIM IconWidth AS INTEGER, IconHeight AS INTEGER
@@ -6954,20 +6960,6 @@ SUB __UI_DrawButton (This AS __UI_ControlTYPE, ControlState AS _BYTE)
             END IF
         END IF
 
-        'Top and bottom edges
-        _PUTIMAGE (3, 0)-STEP(This.Width - 6, 3), ControlImage, , (3, TempControlState * ButtonHeight - ButtonHeight)-STEP(11, 3)
-        _PUTIMAGE (3, This.Height - 3)-STEP(This.Width - 6, 3), ControlImage, , (3, TempControlState * ButtonHeight - ButtonHeight + 18)-STEP(11, 3)
-
-        'Left edges and corners:
-        _PUTIMAGE (0, 2)-STEP(2, This.Height - 4), ControlImage, , (0, TempControlState * ButtonHeight - ButtonHeight + 2)-STEP(2, ButtonHeight - 6)
-        _PUTIMAGE (0, 0), ControlImage, , (0, TempControlState * ButtonHeight - ButtonHeight)-STEP(2, 2)
-        _PUTIMAGE (0, This.Height - 3), ControlImage, , (0, TempControlState * ButtonHeight - 3)-STEP(2, 2)
-
-        'Right edges and corners:
-        _PUTIMAGE (This.Width - 3, 2)-STEP(2, This.Height - 4), ControlImage, , (ButtonWidth - 3, TempControlState * ButtonHeight - ButtonHeight + 2)-STEP(2, ButtonHeight - 6)
-        _PUTIMAGE (This.Width - 2, 0), ControlImage, , (ButtonWidth - 2, TempControlState * ButtonHeight - ButtonHeight)-STEP(2, 2)
-        _PUTIMAGE (This.Width - 3, This.Height - 3), ControlImage, , (ButtonWidth - 3, TempControlState * ButtonHeight - 3)-STEP(2, 2)
-
         'Caption:
         IF NOT This.Disabled THEN
             COLOR This.ForeColor
@@ -6975,11 +6967,6 @@ SUB __UI_DrawButton (This AS __UI_ControlTYPE, ControlState AS _BYTE)
             COLOR Darken(Control(__UI_FormID).BackColor, 80)
         END IF
         __UI_PrintString (IconWidth / 2) + (This.Width \ 2 - __UI_PrintWidth&(TempCaption$) \ 2), ((This.Height \ 2) - uheight& \ 2), TempCaption$
-
-        'Hot key:
-        IF (This.HotKey > 0 AND (__UI_ShowHotKeys AND NOT This.Disabled)) OR (This.HotKey > 0 AND __UI_DesignMode) THEN
-            LINE ((This.Width \ 2 - __UI_PrintWidth&(TempCaption$) \ 2) + This.HotKeyOffset, ((This.Height \ 2) + uheight& \ 2))-STEP(__UI_PrintWidth&(CHR$(This.HotKey)) - 1, 0), This.ForeColor
-        END IF
 
         'Focus outline:
         IF __UI_Focus = This.ID AND __UI_KeyboardFocus THEN
@@ -8501,7 +8488,7 @@ SUB __UI_DrawMenuPanel (This AS __UI_ControlTYPE, Parent AS LONG)
         CLS
 
         'White panel:
-        __UI_ShadowBox 0, 0, This.Width - 1, This.Height - 1, _RGB32(255, 255, 255), 40, 5
+        __UI_ShadowBox 0, 0, This.Width - 1, This.Height - 1, This.BackColor, 40, 5
         LINE (0, 0)-STEP(This.Width - 1, This.Height - 1), This.BorderColor, B
 
         DIM i AS LONG, HasSeparator as _BYTE
