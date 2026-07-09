@@ -525,3 +525,93 @@ First: Bun [Oven-sh.Bun]
 First: Bun [Oven-sh.Bun]
 21:53:51 | Status: Selected: Bun [Oven-sh.Bun]
 21:53:58 | Click id=39
+14:10:35 | IDs WinGetting=26, SearchBT=28, SearchTB=29
+14:10:35 | IDs ListBox1=30, AddToListBT=31, DownloadThisPackageBT=32
+14:10:35 | IDs Package1CB=33, ListBox2=34, DownloadPackagesBT=35
+14:10:35 | IDs SaveThisListBT=36, PackageLB=37
+14:11:18 | IDs WinGetting=26, SearchBT=28, SearchTB=29
+14:11:18 | IDs ListBox1=30, AddToListBT=31, DownloadThisPackageBT=32
+14:11:18 | IDs Package1CB=33, ListBox2=34, DownloadPackagesBT=35
+14:11:18 | IDs SaveThisListBT=36, PackageLB=37
+14:11:27 | Click id=38
+14:11:27 | Import button clicked.
+14:11:27 | Status: Imported list from saved_packages.txt!
+14:11:27 | Status: Imported packages to Queue.
+14:11:27 | Notify: Imported packages to Queue.
+14:11:28 | Click id=26
+14:11:28 | Click id=26
+13:26:21 | IDs WinGetting=26, SearchBT=28, SearchTB=29
+13:26:21 | IDs ListBox1=30, AddToListBT=31, DownloadThisPackageBT=32
+13:26:21 | IDs Package1CB=33, ListBox2=34, DownloadPackagesBT=35
+13:26:21 | IDs SaveThisListBT=36, PackageLB=37
+13:26:48 | Click id=29
+13:26:50 | Click id=29
+13:26:59 | Click id=28
+13:26:59 | Search button clicked. query=7[zip
+13:26:59 | DoSearch start. query=7[zip
+13:27:04 | Parsed results count=0
+13:27:04 | Status: No package match found.
+13:27:04 | Status: No package match found.
+13:27:04 | Notify: No package match found.
+13:27:04 | No results matched parser.
+13:27:10 | Click id=29
+13:27:11 | Click id=29
+13:27:22 | Click id=28
+13:27:22 | Search button clicked. query=7zip
+13:27:22 | DoSearch start. query=7zip
+13:27:24 | Parsed results count=7
+13:27:24 | Status: Selected: 7-Zip [7zip.7zip]
+13:27:24 | Status: Found 7 match(es).
+13:27:24 | Status: Search complete. Found 7 package(s).
+First: 7-Zip [7zip.7zip]
+13:27:24 | Notify: Search complete. Found 7 package(s).
+First: 7-Zip [7zip.7zip]
+13:27:24 | Status: Selected: 7-Zip [7zip.7zip]
+13:27:28 | Status: Selected: NanaZip [M2Team.NanaZip]
+13:27:28 | Click id=30
+13:27:28 | Status: Selected: NanaZip [M2Team.NanaZip]
+13:27:31 | Click id=31
+13:27:31 | Add to list (queue) clicked. selectedId=M2Team.NanaZip
+13:27:31 | Status: Added NanaZip to queue.
+13:27:31 | Status: Added NanaZip to queue.
+13:27:31 | Notify: Added NanaZip to queue.
+13:27:35 | Click id=29
+13:27:43 | Click id=28
+13:27:43 | Search button clicked. query=ubuntu
+13:27:43 | DoSearch start. query=ubuntu
+13:27:45 | Parsed results count=10
+13:27:45 | Status: Selected: Ubuntu [Canonical.Ubuntu]
+13:27:45 | Status: Found 10 match(es).
+13:27:45 | Status: Search complete. Found 10 package(s).
+First: Ubuntu [Canonical.Ubuntu]
+13:27:45 | Notify: Search complete. Found 10 package(s).
+First: Ubuntu [Canonical.Ubuntu]
+13:27:46 | Status: Selected: Ubuntu [Canonical.Ubuntu]
+13:27:47 | Click id=30
+13:27:47 | Status: Selected: Ubuntu [Canonical.Ubuntu]
+13:27:51 | Click id=31
+13:27:51 | Add to list (queue) clicked. selectedId=Canonical.Ubuntu
+13:27:51 | Status: Added Ubuntu to queue.
+13:27:51 | Status: Added Ubuntu to queue.
+13:27:51 | Notify: Added Ubuntu to queue.
+13:27:55 | Click id=29
+13:28:05 | Click id=28
+13:28:05 | Search button clicked. query=slack
+13:28:05 | DoSearch start. query=slack
+13:28:07 | Parsed results count=12
+13:28:07 | Status: Selected: Slack [SlackTechnologies.Slack]
+13:28:07 | Status: Found 12 match(es).
+13:28:07 | Status: Search complete. Found 12 package(s).
+First: Slack [SlackTechnologies.Slack]
+13:28:07 | Notify: Search complete. Found 12 package(s).
+First: Slack [SlackTechnologies.Slack]
+13:28:07 | Status: Selected: Slack [SlackTechnologies.Slack]
+13:35:52 | Click id=30
+13:35:52 | Status: Selected: Slack [SlackTechnologies.Slack]
+13:35:54 | Click id=31
+13:35:54 | Add to list (queue) clicked. selectedId=SlackTechnologies.Slack
+13:35:54 | Status: Added Slack to queue.
+13:35:54 | Status: Added Slack to queue.
+13:35:54 | Notify: Added Slack to queue.
+13:35:57 | Click id=30
+13:35:57 | Status: Selected: Slack [SlackTechnologies.Slack]
